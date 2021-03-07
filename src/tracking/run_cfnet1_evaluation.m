@@ -1,5 +1,6 @@
 %% Sample execution for CFNet-conv1
 % hyper-parameters reported in Supp.material for CVPR'17, Table 2 for arXiv version
+startup;
 tracker_par.join.method = 'corrfilt';
 tracker_par.net = 'cfnet-conv1_e75.mat';
 tracker_par.net_gray = 'cfnet-conv1_gray_e55.mat';
@@ -9,4 +10,4 @@ tracker_par.scaleLR = 0.7;
 tracker_par.wInfluence = 0.2375;
 tracker_par.zLR = 0.0058;
 
-[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('all', tracker_par);
+[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('tc_Airport_ce', tracker_par);

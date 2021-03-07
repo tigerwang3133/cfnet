@@ -1,0 +1,12 @@
+folderdir='C:\Users\admin\Documents\GitHub\ee554\cfnet\data\validation\tc_Basketball_ce1\';
+filelist=dir(strcat(folderdir,'*.jpg'));
+for i =1:length(filelist)
+    rgbImage=imread(strcat(folderdir,filelist(i).name));
+    all_type(i)
+    imshow(rgbImage)
+    hold on
+    for j=1:lenth()
+    rectangle('Position', all_boxes(i,:),'EdgeColor','r', 'LineWidth', 3)
+    pause(1/min(100,length(filelist)))
+end
+hold off
