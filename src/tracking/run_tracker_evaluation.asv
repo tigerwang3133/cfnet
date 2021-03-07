@@ -57,9 +57,7 @@ function [curve_dist, curve_overlap, expected_dist, expected_overlap, all_boxes,
     [curve_overlap, expected_overlap] = compute_score(ious, th_points_o);
     mean_t = mean(times);
     std_t = std(times);
-    if video~="all"
-        visualization(fullfile(tracker_params.paths.eval_set_base, run_params.dataset,video,'/'),all_boxes,all_gt,all_type);
-    end
+    visualization(fullfile(tracker_params.paths.eval_set_base, run_params.dataset,dir.name),all_boxes,all_gt,all_type);
     fprintf('\ndist: %.2f\toverlap: %.2f\tfps: %.1f\n', expected_dist, expected_overlap, mean_t);
 end
 
@@ -130,6 +128,7 @@ function [] = visualization(path,all_boxes,all_gt,all_type)
     filelist=dir(strcat(folderdir,'/*.jpg'));
     for i =1:length(filelist)
         rgbImage=imread(strcat(folderdir,filelist(i).name));
+        all_type(i)
         imshow(rgbImage)
         hold on
         for j=1:1%(length(all_type)-1)/length(filelist)
