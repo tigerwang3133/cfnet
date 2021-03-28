@@ -9,4 +9,4 @@ tracker_par.scaleLR = 0.68;
 tracker_par.wInfluence = 0.175;
 tracker_par.zLR = 0.0102;
 
-[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('all', tracker_par);
+[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('tc_Airport_ce', tracker_par);

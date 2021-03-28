@@ -138,8 +138,23 @@ function [] = visualization(path,all_boxes,all_gt,all_type)
             rectangle('Position', all_gt(index(i),1:4),'EdgeColor','g', 'LineWidth', 3)
         end
         pause(1/min(100,length(filelist)))
+        F(i) = getframe(gcf) ;
      end
      hold off
+    % create the video writer with 1 fps
+    writerObj = VideoWriter('after.avi');
+    writerObj.FrameRate = 40;
+    % set the seconds per image
+    % open the video writer
+    open(writerObj);
+    % write the frames to the video
+    for i=1:length(F)
+        % convert the image to a frame
+        frame = F(i) ;    
+        writeVideo(writerObj, frame);
+    end
+    % close the writer object
+    close(writerObj);
 end
 
 

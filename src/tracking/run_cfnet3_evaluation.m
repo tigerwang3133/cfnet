@@ -9,4 +9,4 @@ tracker_par.scaleLR = 0.66;
 tracker_par.wInfluence = 0.27;
 tracker_par.zLR = 0.008;
 
-[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('all', tracker_par);
+[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('tc_Guitar_ce1', tracker_par);

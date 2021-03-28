@@ -10,4 +10,4 @@ tracker_par.scaleLR = 0.7;
 tracker_par.wInfluence = 0.2375;
 tracker_par.zLR = 0.0058;
 
-[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('tc_Airport_ce', tracker_par);
+[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('tc_Guitar_ce1', tracker_par);
