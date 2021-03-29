@@ -197,7 +197,7 @@ function [bboxes, speed] = tracker(varargin)
             if p.kalman
                 %use kalman for p.targetPosition prediction
                 [R,H,Q,P,dt,A,g,Bu,xp]=kalman_tracking(1,[p.targetPosition,p.kalman_target_Parameters],[0,0,0,0]',R,H,Q,P,dt,A,g,Bu);
-                p.targetPosition=xp(1:2)';
+                p.targetPosition=xp(1:2)'*0.4 + p.targetPosition*0.6;
                 p.kalman_target_Parameters=xp(3:4)';
             end
             % update instance with crop at new frame and previous position
@@ -212,7 +212,7 @@ function [bboxes, speed] = tracker(varargin)
             if p.kalman
                 %use p.targetPosition to correct kalman parameters
                 [R,H,Q,P,dt,A,g,Bu,xp]=kalman_tracking(0,p.targetPosition,xp,R,H,Q,P,dt,A,g,Bu);
-                p.targetPosition=xp(1:2)';
+                p.targetPosition=xp(1:2)'*0.4 + p.targetPosition*0.6;
                 p.kalman_target_Parameters=xp(3:4)';
             end
             % update the exemplar with crop at new frame and new position
