@@ -58,7 +58,7 @@ function [curve_dist, curve_overlap, expected_dist, expected_overlap, all_boxes,
     mean_t = mean(times);
     std_t = std(times);
     if video~="all"
-        visualization(fullfile(tracker_params.paths.eval_set_base, run_params.dataset,video,'/'),all_boxes,all_gt,all_type);
+        visualization(fullfile(tracker_params.paths.eval_set_base, run_params.dataset,video,'/'),all_boxes,all_gt,all_type,tracker_params.kalman);
     end
     fprintf('\ndist: %.2f\toverlap: %.2f\tfps: %.1f\n', expected_dist, expected_overlap, mean_t);
 end
@@ -125,7 +125,7 @@ function is_lost = track_lost_func(frame, box, ground_truth)
     is_lost = (IOU_with_GT(box, ground_truth(frame,:)) <= 0);
 end
 
-function [] = visualization(path,all_boxes,all_gt,all_type)
+function [] = visualization(path,all_boxes,all_gt,all_type,kalman)
     folderdir=path;
     filelist=dir(strcat(folderdir,'/*.jpg'));
     for i =1:length(filelist)
@@ -142,7 +142,12 @@ function [] = visualization(path,all_boxes,all_gt,all_type)
      end
      hold off
     % create the video writer with 1 fps
-    writerObj = VideoWriter('after.avi');
+    dataname=split(folderdir,'\');
+    if kalman
+        writerObj = VideoWriter(strcat(string(dataname(end-1)),'_after.avi'));
+    else
+        writerObj = VideoWriter(strcat(string(dataname(end-1)),'_before.avi'));
+    end
     writerObj.FrameRate = 40;
     % set the seconds per image
     % open the video writer

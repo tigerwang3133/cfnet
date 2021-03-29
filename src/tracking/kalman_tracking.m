@@ -1,8 +1,5 @@
 function [R,H,Q,P,dt,A,g,Bu,xp]=kalman_tracking(predict,x,xp,R,H,Q,P,dt,A,g,Bu)
 %kalman filter
-Imzero = zeros(360,480,3);
-Imback = Imzero/5;
-[MR,MC,Dim] = size(Imback);
 
 % % Kalman parameters
 % R=[[0.2845,0.0045]',[0.0045,0.0455]'];
