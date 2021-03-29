@@ -1,5 +1,6 @@
 %% Sample execution for CFNet-conv2
 % hyper-parameters reported in Supp.material for CVPR'17, Table 2 for arXiv version
+startup;
 tracker_par.join.method = 'corrfilt';
 tracker_par.net = 'cfnet-conv2_e80.mat';
 tracker_par.net_gray = 'cfnet-conv2_gray_e40.mat';

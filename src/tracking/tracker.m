@@ -20,6 +20,17 @@ function [bboxes, speed] = tracker(varargin)
     p.fout = -1;
     p.imgFiles = [];
     p.targetPosition = [];
+    % Kalman parameters
+    p.kalman_target_Parameters = [0,0];
+    R=[[0.2845,0.0045]',[0.0045,0.0455]'];
+    H=[[1,0]',[0,1]',[0,0]',[0,0]'];
+    Q = 0.01*eye(4);
+    P = 100*eye(4);
+    dt=1;  
+    A=[[1,0,0,0]',[0,1,0,0]',[dt,0,1,0]',[0,dt,0,1]'];
+    g = 6; % pixels^2/time step
+    Bu = [0,0,0,g]';    
+    
     p.targetSize = [];
     p.track_lost = [];
     p.ground_truth = [];
@@ -181,6 +192,12 @@ function [bboxes, speed] = tracker(varargin)
    			% if grayscale repeat one channel to match filters size
     		if(size(im, 3)==1), im = repmat(im, [1 1 3]); end
             scaledInstance = s_x .* scales;
+            
+            %use kalman for p.targetPosition prediction
+            [R,H,Q,P,dt,A,g,Bu,xp]=kalman_tracking(1,[p.targetPosition,p.kalman_target_Parameters],[0,0,0,0]',R,H,Q,P,dt,A,g,Bu);
+            p.targetPosition=xp(1:2)';
+            p.kalman_target_Parameters=xp(3:4)';
+            
             % update instance with crop at new frame and previous position
             [x_crops, pad_masks_x] = make_scale_pyramid(im, p.targetPosition, scaledInstance, p.instanceSize, avgChans, stats, p);
             copy = @(v, n) cellfun(@(x) repmat(x, [1 1 1 n]), v, 'UniformOutput', false);
@@ -190,7 +207,11 @@ function [bboxes, speed] = tracker(varargin)
 
             % update target position
             p.targetPosition = gather(newTargetPosition);
-
+            %use p.targetPosition to correct kalman parameters
+            [R,H,Q,P,dt,A,g,Bu,xp]=kalman_tracking(0,p.targetPosition,xp,R,H,Q,P,dt,A,g,Bu);
+            p.targetPosition=xp(1:2)';
+            p.kalman_target_Parameters=xp(3:4)';
+            
             % update the exemplar with crop at new frame and new position
             if p.zLR > 0
                 scaledExemplar = s_z .* scales;

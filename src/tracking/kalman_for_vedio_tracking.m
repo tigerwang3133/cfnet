@@ -1,34 +1,34 @@
 function kalman_for_vedio_tracking
 clear,clc
-% 计算图像背景
+% 计算图�?背景
 Imzero = zeros(360,480,3);
 for i = 1:5
-Im{i} = double(imread(['D:\Spring-2021\Computer-Vision\Project\cfnet-master\data\validation\tc_Baby_ce\','0',int2str(i+100),'.jpg']));
+Im{i} = double(imread(['C:\Users\admin\Documents\GitHub\ee554\cfnet\data\validation\tc_Baby_ce\','0',int2str(i+100),'.jpg']));
 Imzero = Im{i}+Imzero;
 end
 Imback = Imzero/5;
 [MR,MC,Dim] = size(Imback);
 
-% Kalman 滤波器初始化
+% Kalman 滤波器�?始化
 R=[[0.2845,0.0045]',[0.0045,0.0455]'];
 H=[[1,0]',[0,1]',[0,0]',[0,0]'];
 Q = 0.01*eye(4);
 P = 100*eye(4);
-dt=1;  % 采样时间，也就是图像帧时间
+dt=1;  % 采样时间，也就是图�?帧时间
 A=[[1,0,0,0]',[0,1,0,0]',[dt,0,1,0]',[0,dt,0,1]'];
 g = 6; % pixels^2/time step
 Bu = [0,0,0,g]';
-kfinit=0;           % kalman增益初始化
-x=zeros(100,4);     % 目标状态初始化
+kfinit=0;           % kalman增益�?始化
+x=zeros(100,4);     % 目标状�?�?始化
 
-% 检测视频中每一帧图像
+% 检测视频中�?一帧图�?
 for i = 1 : 60
-  % 读取图像
-  Im = (imread(['D:\Spring-2021\Computer-Vision\Project\cfnet-master\data\validation\tc_Baby_ce\','0',int2str(i+100),'.jpg'])); 
+  % 读�?�图�?
+  Im = (imread(['C:\Users\admin\Documents\GitHub\ee554\cfnet\data\validation\tc_Baby_ce\','0',int2str(i+100),'.jpg'])); 
   imshow(Im);
   Imwork = double(Im);
 
-  % 检测目标（目标是一个球）
+  % 检测目标（目标是一个�?�）
   [cc(i),cr(i),radius,flag] = extractball(Imwork,Imback,i);
   if flag==0
     continue;
@@ -51,7 +51,8 @@ for i = 1 : 60
   PP = A*P*A' + Q;
   K = PP*H'*inv(H*PP*H'+R);
   x(i,:) = (xp + K*([cc(i),cr(i)]' - H*xp))';  %[cc(i),cr(i)]' K时系统的观测值
-  [cc(i),cr(i)];
+  x(i,:)
+  [cc(i),cr(i)]
   P = (eye(4)-K*H)*PP;
 
   hold on;
