@@ -1,11 +1,16 @@
-tc_Airport_ce,false,14.3148,81.2828,35.0417
-tc_Airport_ce,false,14.3148,81.2828,41.2554
-tc_Airport_ce,true,15.2542,80.8047,44.4998
-tc_Baby_ce,false,28.3845,53.8465,47.0764
-tc_Baby_ce,true,13.8567,64.204,45.9221
-tc_Badminton_ce1,false,10.3611,68.17,45.2453
-tc_Badminton_ce1,true,12.2791,66.2761,46.134
-tc_Badminton_ce2,false,18.9189,66.9546,43.7402
-tc_Badminton_ce2,true,39.8682,49.5365,42.5567
-tc_Ball_ce1,false,97.1909,2.5568,47.5017
-tc_Ball_ce1,true,96.6162,2.9732,47.9483
+dataset,use Kalman,dist,overlap,fps
+tc_Airport_ce,FALSE,14.3148,81.2828,41.2554
+tc_Airport_ce,TRUE,15.2542,80.8047,44.4998
+tc_Baby_ce,FALSE,28.3845,53.8465,47.0764
+tc_Baby_ce,TRUE,13.8567,64.204,45.9221
+tc_Badminton_ce1,FALSE,10.3611,68.17,45.2453
+tc_Badminton_ce1,TRUE,12.2791,66.2761,46.134
+tc_Badminton_ce2,FALSE,18.9189,66.9546,43.7402
+tc_Badminton_ce2,TRUE,39.8682,49.5365,42.5567
+tc_Ball_ce1,FALSE,97.1909,2.5568,47.5017
+tc_Ball_ce1,TRUE,96.6162,2.9732,47.9483
+tc_Airport_ce,FALSE,14.3148,81.2828,35.0417
+tc_Airport_ce,FALSE,14.3148,81.2828,35.0417
+tc_Airport_ce,FALSE,14.3148,81.2828,35.0417
+tc_Airport_ce,FALSE,14.3148,81.2828,35.0417
+tc_Airport_ce,FALSE,14.3148,81.2828,35.0417
