@@ -23,7 +23,7 @@ function [bboxes, speed] = tracker(varargin)
     % Kalman parameters
     p.kalman_target_Parameters = [0,0];
     p.kalman=false;
-    R=[[0.2845,0.0045]',[0.0045,0.0455]'];
+    R=[[0.8545,0.0190]',[0.0045,0.0355]'];
     H=[[1,0]',[0,1]',[0,0]',[0,0]'];
     Q = 0.01*eye(4);
     P = 100*eye(4);
