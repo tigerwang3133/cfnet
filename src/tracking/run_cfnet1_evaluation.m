@@ -10,4 +10,17 @@ tracker_par.scaleLR = 0.7;
 tracker_par.wInfluence = 0.2375;
 tracker_par.zLR = 0.0058;
 
-[~,~,dist,overlap,~,~,~,~] = run_tracker_evaluation('tc_Guitar_ce1', tracker_par);
+datatest='all';
+
+tracker_par.kalman=false;
+[~,~,dist,overlap,~,~,mean_t,~] = run_tracker_evaluation(datatest, tracker_par);
+fid=fopen('results.csv','a+');
+x={datatest,string(tracker_par.kalman),string(dist),string(overlap),string(mean_t)};
+fprintf(fid,'%s,',x{1,1:end-1});
+fprintf(fid,'%s\n',x{1,end});
+tracker_par.kalman=true;
+[~,~,dist,overlap,~,~,mean_t,~] = run_tracker_evaluation(datatest, tracker_par);
+x={datatest,string(tracker_par.kalman),string(dist),string(overlap),string(mean_t)};
+fprintf(fid,'%s,',x{1,1:end-1});
+fprintf(fid,'%s\n',x{1,end});
+fclose(fid);
