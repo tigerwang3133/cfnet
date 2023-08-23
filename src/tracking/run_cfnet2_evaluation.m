@@ -10,7 +10,7 @@ tracker_par.scaleLR = 0.52;
 tracker_par.wInfluence = 0.2625;
 tracker_par.zLR = 0.005;
 
-datatest='all';
+datatest='tc_Baby_ce';
 
 tracker_par.kalman=false;
 [~,~,dist,overlap,~,~,mean_t,~] = run_tracker_evaluation(datatest, tracker_par);
